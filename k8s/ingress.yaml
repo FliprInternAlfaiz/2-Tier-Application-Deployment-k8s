@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: chat-app-ingress
+  namespace: chat-app
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  labels:
+    app: chat-app-Ingress
+spec:
+  rules:
+  - host: chat-tws.com
+    http:
+      paths:
+      - path: "/frontend"
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port: 
+              number: 80
+      - path: "/api"
+        pathType: Prefix
+        backend:
+          service:
+            name: backend
+            port: 
+              number: 5001
